@@ -17,10 +17,14 @@ function App() {
     // };
 
     const handleKeypress = event => {
-      if (event.key === 'Enter') {
+    //   if (event.key === 'Enter') {
         //   handleSubmit();
-          setFetch(true);
-      }
+    //       setFetch(true);
+    //   }
+        // const resultsList = document.getElementById('results-list');
+        // if (resultsList.firstChild)
+        //     resultsList.innerHTML = '';
+        setFetch(true);
     };
 
     const [data, setData] = useState(null);
@@ -29,18 +33,24 @@ function App() {
         if (fetchData) {
            axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
                .then((res) => {
-                document.getElementById('results-text')
+                   if (res.data.Search) {
+                    document.getElementById('results-text')
                     .innerText = `Results for "${textInput}"`;
-                   
-                 res.data.Search.forEach(element => {
-                     const li = document.createElement("li");
-                     const button = document.createElement("button");
+                       res.data.Search.forEach(element => {
+                           const li = document.createElement("li");
+                           const button = document.createElement("button");
 
-                     button.innerHTML = 'Nominate';
-                     li.innerHTML = `${element.Title} (${element.Year}) `;
-                     li.append(button);
-                     document.getElementById('results-list').appendChild(li);
-                 });
+                           button.innerHTML = 'Nominate';
+                           li.innerHTML = `${element.Title} (${element.Year}) `;
+                           li.append(button);
+                           document.getElementById('results-list').appendChild(li);
+                       });
+                   } else {
+                        const resultsList = document.getElementById('results-list');
+                        const resultsText = document.getElementById('results-text');
+                        resultsList.innerHTML = "";
+                        resultsText.innerText = `No results found`;
+                   }
  }  
  );
        }
