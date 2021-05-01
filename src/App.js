@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 import './App.css';
 
 
@@ -10,16 +11,34 @@ function App() {
         setTextInput(event.target.value);
     };
     
-    const handleSubmit = event => {
-        // event.preventDefault();
-        alert(`Movie title search is - ${textInput}`);
-    };
+    // const handleSubmit = event => {
+    //     // event.preventDefault();
+    //     alert(`Movie title search is - ${textInput}`);
+    // };
 
     const handleKeypress = event => {
       if (event.key === 'Enter') {
-        handleSubmit();
+        //   handleSubmit();
+          setFetch(true);
       }
     };
+
+    const [data, setData] = useState(null);
+    const [fetchData, setFetch] = useState(false);
+    useEffect(() => {
+        if (fetchData) {
+        //    const regex = new RegExp(textInput, 'gmi')
+           axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
+               .then((res) => {
+                 res.data.Search.forEach(element => {
+                     let li = document.createElement("li");
+                     li.innerHTML = element.Title;
+                     document.getElementById('results-list').appendChild(li);
+                 });
+ }  
+ );
+       }
+    }, [fetchData, textInput]);
     
   return (
     <div class='container'>
