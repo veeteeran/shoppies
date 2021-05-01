@@ -27,12 +27,18 @@ function App() {
     const [fetchData, setFetch] = useState(false);
     useEffect(() => {
         if (fetchData) {
-        //    const regex = new RegExp(textInput, 'gmi')
            axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
                .then((res) => {
+                document.getElementById('results-text')
+                    .innerText = `Results for "${textInput}"`;
+                   
                  res.data.Search.forEach(element => {
-                     let li = document.createElement("li");
-                     li.innerHTML = element.Title;
+                     const li = document.createElement("li");
+                     const button = document.createElement("button");
+
+                     button.innerHTML = 'Nominate';
+                     li.innerHTML = `${element.Title} (${element.Year}) `;
+                     li.append(button);
                      document.getElementById('results-list').appendChild(li);
                  });
  }  
@@ -56,10 +62,10 @@ function App() {
         </div>
         <div class='bottom-box'>
             <div class='results'>
-                <div class='results-text'>
-                      Results for
-                    <ul id='results-list'></ul>
-                </div>
+                <div id='results-text'>
+                      Results
+                </div>    
+                <ul id='results-list'></ul>
             </div>
             <div class='nominations'>
                 <div class='nominations-text'>
