@@ -47,8 +47,12 @@
   min-height: 1rem;
 }
 
-.results-text {
+#results-text {
   margin: 1rem;
+}
+
+#results-list li {
+  margin-bottom: .5rem;
 }
 
 .nominations {
