@@ -1,8 +1,26 @@
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 
 
 function App() {
+    const [textInput, setTextInput] = useState('');
+
+    const handleChange = event => {
+        setTextInput(event.target.value);
+    };
+    
+    const handleSubmit = event => {
+        // event.preventDefault();
+        alert(`Movie title search is - ${textInput}`);
+    };
+
+    const handleKeypress = event => {
+      if (event.key === 'Enter') {
+        handleSubmit();
+      }
+    };
+    
   return (
     <div class='container'>
         <h1>The Shoppies</h1>
@@ -12,7 +30,10 @@ function App() {
                   type='text'
                   id='title'
                   placeholder='Search...'
-                  />
+                  value={textInput}
+                  onChange={handleChange}
+                  onKeyPress={handleKeypress}
+              />
         </div>
         <div class='bottom-box'>
             <div class='results'>
