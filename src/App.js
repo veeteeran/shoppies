@@ -40,8 +40,9 @@ function App() {
                            const li = document.createElement("li");
                            const button = document.createElement("button");
 
+                           button.onclick = () => handleNominate(element.Title, element.Year);
                            button.innerHTML = 'Nominate';
-                           li.innerHTML = `${element.Title} (${element.Year}) `;
+                           li.innerHTML = `<p>${element.Title} (${element.Year})</p> `;
                            li.append(button);
                            document.getElementById('results-list').appendChild(li);
                        });
@@ -55,6 +56,23 @@ function App() {
  );
        }
     }, [fetchData, textInput]);
+
+    const handleNominate = (title, year) => {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
+
+        li.innerHTML = `<p>${title} (${year})</p> `;
+        document.getElementById('nominations-list').appendChild(li);
+
+        button.innerHTML = 'Remove';
+        button.onclick = () => handleRemove();
+        li.append(button);
+        document.getElementById('nominations-list').appendChild(li);
+    }
+
+    const handleRemove = () => {
+        alert('remove');
+    }
     
   return (
     <div class='container'>
@@ -79,8 +97,9 @@ function App() {
             </div>
             <div class='nominations'>
                 <div class='nominations-text'>
-                    Nominations
+                      Nominations
                 </div>
+                <ul id='nominations-list'></ul>
             </div>
       </div>
     </div>
