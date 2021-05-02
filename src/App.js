@@ -21,9 +21,10 @@ function App() {
         //   handleSubmit();
     //       setFetch(true);
     //   }
-        // const resultsList = document.getElementById('results-list');
+        const resultsList = document.getElementById('results-list');
         // if (resultsList.firstChild)
         //     resultsList.innerHTML = '';
+        resultsList.replaceChildren();
         setFetch(true);
     };
 
@@ -40,7 +41,7 @@ function App() {
                            const li = document.createElement("li");
                            const button = document.createElement("button");
 
-                           button.onclick = () => handleNominate(element.Title, element.Year);
+                           button.onclick = event => handleNominate(event, element.Title, element.Year);
                            button.innerHTML = 'Nominate';
                            li.innerHTML = `<p>${element.Title} (${element.Year})</p> `;
                            li.append(button);
@@ -49,7 +50,8 @@ function App() {
                    } else {
                         const resultsList = document.getElementById('results-list');
                         const resultsText = document.getElementById('results-text');
-                        resultsList.innerHTML = "";
+                        // resultsList.innerHTML = "";
+                        resultsList.replaceChildren();
                         resultsText.innerText = `No results found`;
                    }
  }  
@@ -57,21 +59,30 @@ function App() {
        }
     }, [fetchData, textInput]);
 
-    const handleNominate = (title, year) => {
+    const handleNominate = (nominateClick,title, year) => {
         const li = document.createElement("li");
         const button = document.createElement("button");
+        const nominationsList = document.getElementById('nominations-list');
 
         li.innerHTML = `<p>${title} (${year})</p> `;
-        document.getElementById('nominations-list').appendChild(li);
+        nominationsList.appendChild(li);
 
         button.innerHTML = 'Remove';
-        button.onclick = () => handleRemove();
+        button.onclick = event => handleRemove(event, nominateClick);
         li.append(button);
-        document.getElementById('nominations-list').appendChild(li);
+        nominationsList.appendChild(li);
+
+        const target = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
+        target.disabled = true;
     }
 
-    const handleRemove = () => {
-        alert('remove');
+    const handleRemove = (event, nominateClick) => {
+        const target = (event.target) ? event.target : event.srcElement;
+        const li = target.parentNode;
+        li.remove();
+
+        const nominateBtn = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
+        nominateBtn.disabled = false;
     }
     
   return (
