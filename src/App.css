@@ -9,16 +9,8 @@
   flex-direction: column;
 }
 
-/* .container h1 {
+.container h1 {
   margin-left: 6.5rem;
-} */
-
-.header-container {
-  margin-left: 6.5rem;
-  margin-right: 6.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center
 }
 
 .search-container {
@@ -88,11 +80,4 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* flex-direction: column; */
 }
-
-/* .button-container {
-  display: flex;
-  flex-direction: row;
-  align-items: space-between;
-} */

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './App.css';
-// import Banner from './Banner';
-
 
 
 function App() {
@@ -11,20 +9,9 @@ function App() {
     const handleChange = event => {
         setTextInput(event.target.value);
     };
-    
-    // const handleSubmit = event => {
-    //     // event.preventDefault();
-    //     alert(`Movie title search is - ${textInput}`);
-    // };
 
     const handleKeypress = event => {
-    //   if (event.key === 'Enter') {
-        //   handleSubmit();
-    //       setFetch(true);
-    //   }
         const resultsList = document.getElementById('results-list');
-        // if (resultsList.firstChild)
-        //     resultsList.innerHTML = '';
         resultsList.replaceChildren();
         setFetch(true);
     };
@@ -51,7 +38,6 @@ function App() {
                    } else {
                         const resultsList = document.getElementById('results-list');
                         const resultsText = document.getElementById('results-text');
-                        // resultsList.innerHTML = "";
                         resultsList.replaceChildren();
                         resultsText.innerText = `No results found`;
                    }
@@ -64,20 +50,12 @@ function App() {
         const li = document.createElement("li");
         const button = document.createElement("button");
         const nominationsList = document.getElementById('nominations-list');
-        // const modalList = document.getElementById('modal-list');
-
 
         li.innerHTML = `<p>${title} (${year})</p> `;
-        // nominationsList.appendChild(li);
-
         button.innerHTML = 'Remove';
         button.onclick = event => handleRemove(event, nominateClick);
         li.append(button);
         nominationsList.appendChild(li);
-
-        // const liClone = li.cloneNode(true);
-        // liClone.onclick = event => handleRemove(event, nominateClick);
-        // modalList.appendChild(liClone);
 
         const target = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
         target.disabled = true;
@@ -118,7 +96,6 @@ function App() {
 
     const showModal = () => {
         document.getElementById('id01').style.display = 'block';
-        // document.getElementById('banner').style.display='block'
     }
 
     const hideModal = () => {
@@ -127,10 +104,7 @@ function App() {
     
   return (
     <div className='container'>
-        <div className='header-container'>
-            <h1>The Shoppies</h1>
-            {/* <Banner id='banner'/> */}
-        </div>
+        <h1>The Shoppies</h1>
         <div className='search-container'>
               <label htmlFor='title'>Movie title</label>
               {/* <div className='search'>
@@ -145,7 +119,6 @@ function App() {
                 />
               {/* </div> */}
         </div>
-        {/* <Banner id='banner'/> */}
         <div className='bottom-box'>
             <div className='results'>
                 <div id='results-text'>
@@ -169,10 +142,8 @@ function App() {
                 </header>
                 <div className="w3-container banner-container">
                     <p>Please edit of submit your choices</p>
-                    {/* <div className='button-container'> */}
-                        <button onClick={hideModal}>Edit</button>
-                        <button>Submit</button>
-                    {/* </div> */}
+                    <button onClick={hideModal}>Edit</button>
+                    <button>Submit</button>
                 </div>
             </div>
         </div>
