@@ -1,3 +1,5 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
 .container {
   background-color: lightgray;
   margin-left: 3rem;
@@ -7,8 +9,16 @@
   flex-direction: column;
 }
 
-.container h1 {
+/* .container h1 {
   margin-left: 6.5rem;
+} */
+
+.header-container {
+  margin-left: 6.5rem;
+  margin-right: 6.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
 }
 
 .search-container {
@@ -34,6 +44,15 @@
   margin-right: 1rem;
   margin-bottom: 1rem;
 }
+
+/* .search { position: relative; }
+.search input { text-indent: 30px;}
+.search .fa-search { 
+  position: absolute;
+  top: 5px;
+  left: 24px;
+  font-size: 15px;
+} */
 
 .bottom-box {
   width: 75%;
@@ -64,3 +83,16 @@
 .nominations-text {
   margin: 1rem;
 }
+
+.banner-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* flex-direction: column; */
+}
+
+/* .button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+} */
