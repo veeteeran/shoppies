@@ -10,7 +10,7 @@
 }
 
 .container h1 {
-  margin-left: 6.5rem;
+  margin-left: 10rem;
 }
 
 .search-container {
@@ -37,14 +37,20 @@
   margin-bottom: 1rem;
 }
 
-/* .search { position: relative; }
-.search input { text-indent: 30px;}
+.search {
+  position: relative; 
+}
+
+.search-container input {
+  text-indent: 30px;
+}
+
 .search .fa-search { 
   position: absolute;
   top: 5px;
   left: 24px;
   font-size: 15px;
-} */
+}
 
 .bottom-box {
   width: 75%;

@@ -5,9 +5,6 @@ import './App.css';
 
 function App() {
     const [textInput, setTextInput] = useState('');
-    const [nominees, setNominees] = useState(
-        localStorage.getItem('nominees' || '')
-    );
 
     const handleChange = event => {
         setTextInput(event.target.value);
@@ -121,8 +118,9 @@ function App() {
         <h1>The Shoppies</h1>
         <div className='search-container'>
               <label htmlFor='title'>Movie title</label>
-              {/* <div className='search'>
-                <i class="fa fa-search" aria-hidden="true"></i> */}
+              <div className='search'>
+                  <i class="fa fa-search" aria-hidden="true"></i>
+              </div>
                 <input
                     type='search'
                     id='title'
@@ -131,7 +129,6 @@ function App() {
                     onChange={handleChange}
                     onKeyPress={handleKeypress}
                 />
-              {/* </div> */}
         </div>
         <div className='bottom-box'>
             <div className='results'>
@@ -144,7 +141,7 @@ function App() {
                 <div className='nominations-text'>
                       Nominations
                 </div>
-                  <ul id='nominations-list'>{ nominees }</ul>
+                  <ul id='nominations-list'></ul>
             </div>
           </div>
         <div id="id01" className="w3-modal">
