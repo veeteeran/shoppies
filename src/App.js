@@ -5,6 +5,9 @@ import './App.css';
 
 function App() {
     const [textInput, setTextInput] = useState('');
+    const [nominees, setNominees] = useState(
+        localStorage.getItem('nominees' || '')
+    );
 
     const handleChange = event => {
         setTextInput(event.target.value);
@@ -16,37 +19,19 @@ function App() {
         setFetch(true);
     };
 
-    const [data, setData] = useState(null);
-    const [fetchData, setFetch] = useState(false);
-    useEffect(() => {
-        if (fetchData) {
-           axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
-               .then((res) => {
-                   if (res.data.Search) {
-                    document.getElementById('results-text')
-                    .innerText = `Results for "${textInput}"`;
-                       res.data.Search.forEach(element => {
-                           const li = document.createElement("li");
-                           const button = document.createElement("button");
+    const createResults = (element) => {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
 
-                           button.onclick = event => handleNominate(event, element.Title, element.Year);
-                           button.innerHTML = 'Nominate';
-                           li.innerHTML = `<p>${element.Title} (${element.Year})</p> `;
-                           li.append(button);
-                           document.getElementById('results-list').appendChild(li);
-                       });
-                   } else {
-                        const resultsList = document.getElementById('results-list');
-                        const resultsText = document.getElementById('results-text');
-                        resultsList.replaceChildren();
-                        resultsText.innerText = `No results found`;
-                   }
- }  
- );
-       }
-    }, [fetchData, textInput]);
+        button.disabled = false;
+        button.onclick = event => handleNominate(event, element.Title, element.Year);
+        button.innerHTML = 'Nominate';
+        li.innerHTML = `<p>${element.Title} (${element.Year})</p> `;
+        li.append(button);
+        document.getElementById('results-list').appendChild(li);
+    }
 
-    const handleNominate = (nominateClick, title, year) => {
+    const createNominees = (nominateClick, title, year) => {
         const li = document.createElement("li");
         const button = document.createElement("button");
         const nominationsList = document.getElementById('nominations-list');
@@ -56,6 +41,36 @@ function App() {
         button.onclick = event => handleRemove(event, nominateClick);
         li.append(button);
         nominationsList.appendChild(li);
+    }
+
+    const [fetchData, setFetch] = useState(false);
+    useEffect(() => {
+        if (fetchData) {
+            try {
+           axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
+                .then((res) => {
+                    if (res.data.Search) {
+                        document.getElementById('results-text')
+                            .innerText = `Results for "${textInput}"`;
+                        res.data.Search.forEach(element => createResults(element));
+                    } else {
+                        const resultsList = document.getElementById('results-list');
+                        const resultsText = document.getElementById('results-text');
+                        resultsList.replaceChildren();
+                        resultsText.innerText = `No results found`;
+                    }
+                }
+                );
+            } catch (err) {
+                console.log(err)
+        }
+        }
+    }, [fetchData, textInput]);
+
+    const handleNominate = (nominateClick, title, year) => {
+        const nominationsList = document.getElementById('nominations-list');
+
+        createNominees(nominateClick, title, year);
 
         const target = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
         target.disabled = true;
@@ -87,7 +102,6 @@ function App() {
             });
 
             resultsList.childNodes.forEach(element => {
-                console.log(element.firstChild.innerText)
                 if (nomineeNames.includes(element.firstChild.innerText) !== true)
                     element.lastChild.disabled = false;
             });
@@ -130,7 +144,7 @@ function App() {
                 <div className='nominations-text'>
                       Nominations
                 </div>
-                <ul id='nominations-list'></ul>
+                  <ul id='nominations-list'>{ nominees }</ul>
             </div>
           </div>
         <div id="id01" className="w3-modal">
@@ -141,7 +155,7 @@ function App() {
                     <h2>Thanks for choosing your nominees</h2>
                 </header>
                 <div className="w3-container banner-container">
-                    <p>Please edit of submit your choices</p>
+                    <p>Please edit or submit your choices</p>
                     <button onClick={hideModal}>Edit</button>
                     <button>Submit</button>
                 </div>
