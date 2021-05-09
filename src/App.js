@@ -62,7 +62,7 @@ function App() {
                 console.log(err)
         }
         }
-    }, [fetchData, textInput]);
+    }, [fetchData, textInput, createResults]);
 
     const handleNominate = (nominateClick, title, year) => {
         const nominationsList = document.getElementById('nominations-list');
