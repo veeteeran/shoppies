@@ -112,6 +112,34 @@ function App() {
     const hideModal = () => {
         document.getElementById('id01').style.display='none'
     }
+
+    const handleSubmit = () => {
+        setModalH2('Submission sucessful!');
+        setModalParagraph('Winners will be announced at The Shoppies awards ceremony!');
+        document.getElementById("edit-btn").remove()
+        document.getElementById("submit-btn").remove()
+
+        const paragraphContainer = document.getElementById('paragraph-container');
+        const button = createCloseBtn();
+
+        paragraphContainer.appendChild(button);
+
+        document.getElementById('close-span').onclick = () => handleClose();
+    }
+
+    const createCloseBtn = () => {
+        const button = document.createElement("button");
+        button.innerHTML = 'Close';
+        button.onclick = () => handleClose();
+        return button;
+    }
+
+    const handleClose = () => {
+        window.location.reload();
+    }
+
+    const [modalH2, setModalH2] = useState('Thanks for choosing your nominees');
+    const [modalParagraph, setModalParagraph] = useState('Please edit or submit your choices');
     
   return (
     <div className='container'>
@@ -148,13 +176,13 @@ function App() {
             <div className="w3-modal-content">
                 <header className="w3-container w3-light-grey"> 
                     <span onClick={hideModal}
-                    className="w3-button w3-display-topright">&times;</span>
-                    <h2>Thanks for choosing your nominees</h2>
+                    className="w3-button w3-display-topright" id='close-span'>&times;</span>
+                      <h2>{modalH2}</h2>
                 </header>
-                <div className="w3-container banner-container">
-                    <p>Please edit or submit your choices</p>
-                    <button onClick={hideModal}>Edit</button>
-                    <button>Submit</button>
+                <div className="w3-container banner-container" id='paragraph-container'>
+                    <p>{modalParagraph}</p>
+                    <button id='edit-btn' onClick={hideModal}>Edit</button>
+                    <button id='submit-btn' onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>
