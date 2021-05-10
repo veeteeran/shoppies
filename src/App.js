@@ -8,16 +8,16 @@ function App() {
 
     const handleChange = event => {
         setTextInput(event.target.value);
-        setFetch(true);
+        // const resultsList = document.getElementById('results-list');
+        // resultsList.replaceChildren();
+        // setFetch(true);
     };
 
-    // const handleKeypress = event => {
-    //     if (event.keyCode === 13) {
-    //         const resultsList = document.getElementById('results-list');
-    //         resultsList.replaceChildren();
-    //         setFetch(true);
-    //     }
-    // };
+    const handleKeypress = event => {
+        const resultsList = document.getElementById('results-list');
+        resultsList.replaceChildren();
+        setFetch(true);
+    };
 
     const handleRemove = useCallback((event, nominateClick) => {
         const target = (event.target) ? event.target : event.srcElement;
@@ -100,7 +100,7 @@ function App() {
     useEffect(() => {
         if (fetchData) {
             try {
-           axios.get(`http://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
+           axios.get(`https://www.omdbapi.com/?apikey=dd46713f&s=${textInput}`)
                 .then((res) => {
                     if (res.data.Search) {
                         document.getElementById('results-text')
@@ -211,7 +211,7 @@ function App() {
                     placeholder='Search...'
                     value={textInput}
                     onChange={handleChange}
-                    // onKeyPress={handleKeypress}
+                    onKeyPress={handleKeypress}
                 />
         </div>
         <div className='bottom-box'>
