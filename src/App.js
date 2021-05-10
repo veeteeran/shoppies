@@ -8,9 +8,6 @@ function App() {
 
     const handleChange = event => {
         setTextInput(event.target.value);
-        // const resultsList = document.getElementById('results-list');
-        // resultsList.replaceChildren();
-        // setFetch(true);
     };
 
     const handleKeypress = event => {
@@ -84,18 +81,6 @@ function App() {
         document.getElementById('results-list').appendChild(li);
     }, [handleNominate]);
 
-    // const createNominees = (nominateClick, title, year) => {
-    //     const li = document.createElement("li");
-    //     const button = document.createElement("button");
-    //     const nominationsList = document.getElementById('nominations-list');
-
-    //     li.innerHTML = `<p>${title} (${year})</p> `;
-    //     button.innerHTML = 'Remove';
-    //     button.onclick = event => handleRemove(event, nominateClick);
-    //     li.append(button);
-    //     nominationsList.appendChild(li);
-    // }
-
     const [fetchData, setFetch] = useState(false);
     useEffect(() => {
         if (fetchData) {
@@ -119,47 +104,6 @@ function App() {
         }
         }
     }, [fetchData, textInput, createResults]);
-
-    // const handleNominate = (nominateClick, title, year) => {
-    //     const nominationsList = document.getElementById('nominations-list');
-
-    //     createNominees(nominateClick, title, year);
-
-    //     const target = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
-    //     target.disabled = true;
-
-    //     if (nominationsList.childElementCount === 5) {
-    //         showModal();
-    //         const resultsList = document.getElementById('results-list');
-    //         resultsList.childNodes.forEach(element => {
-    //             element.lastChild.disabled = true;
-    //         })
-    //     }
-    // }
-
-    // const handleRemove = (event, nominateClick) => {
-    //     const target = (event.target) ? event.target : event.srcElement;
-    //     const li = target.parentNode;
-    //     li.remove();
-
-    //     const nominateBtn = (nominateClick.target) ? nominateClick.target : nominateClick.srcElement;
-    //     nominateBtn.disabled = false;
-
-    //     const nominationsList = document.getElementById('nominations-list');
-    //     if (nominationsList.childElementCount < 5) {
-    //         hideModal();
-    //         const resultsList = document.getElementById('results-list');
-    //         const nomineeNames = [];
-    //         nominationsList.childNodes.forEach(element => {
-    //             nomineeNames.push(element.firstChild.innerText);
-    //         });
-
-    //         resultsList.childNodes.forEach(element => {
-    //             if (nomineeNames.includes(element.firstChild.innerText) !== true)
-    //                 element.lastChild.disabled = false;
-    //         });
-    //     }
-    // }
 
     const showModal = () => {
         document.getElementById('id01').style.display = 'block';
