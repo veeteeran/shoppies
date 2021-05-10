@@ -21,7 +21,7 @@ Once five nominees are chosen a message appears alert the user of their choices.
 
 ## Check out an example
 
-The site can be found [here](https://veeteeran.github.io/shoppies/)
+The site can be found [here](https://keen-elion-ba5a96.netlify.app/)
 
 Or you can clone the repository to your local machine and use the `npm run start` in a terminal.
 
